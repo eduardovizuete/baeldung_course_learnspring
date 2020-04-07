@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.baeldung.persistence.model.Project;
 import com.baeldung.persistence.repository.IProjectRepository;
 
+@Repository
 public class ProjectRepositoryImpl implements IProjectRepository {
 	
 	List<Project> projects = new ArrayList<>();
@@ -24,7 +27,7 @@ public class ProjectRepositoryImpl implements IProjectRepository {
 		} else {
 			projects.remove(existingProject);
 			Project newProject = new Project(project);
-			projects.add(project);
+			projects.add(newProject);
 		}
 		return project;
 	}	
