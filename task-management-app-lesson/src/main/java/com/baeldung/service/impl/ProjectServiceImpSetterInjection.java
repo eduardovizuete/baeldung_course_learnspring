@@ -2,18 +2,18 @@ package com.baeldung.service.impl;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baeldung.persistence.model.Project;
 import com.baeldung.persistence.repository.IProjectRepository;
 import com.baeldung.service.IProjectService;
 
-@Service
-public class ProjectServiceImpl implements IProjectService {
+public class ProjectServiceImpSetterInjection implements IProjectService {
 	
 	private IProjectRepository projectRepository;
-
-	public ProjectServiceImpl(IProjectRepository projectRepository) {
+	
+	@Autowired
+	public void setProjectRepository(IProjectRepository projectRepository) {
 		this.projectRepository = projectRepository;
 	}
 
