@@ -1,8 +1,8 @@
-package com.baeldung.persistence.repository;
+package com.baeldung.taskmanagementapplesson.persistence.repository;
 
 import java.util.Optional;
 
-import com.baeldung.persistence.model.Project;
+import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
 public interface IProjectRepository {
 	

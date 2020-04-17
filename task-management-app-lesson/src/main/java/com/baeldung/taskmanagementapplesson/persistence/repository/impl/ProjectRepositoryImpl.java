@@ -1,4 +1,4 @@
-package com.baeldung.persistence.repository.impl;
+package com.baeldung.taskmanagementapplesson.persistence.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.baeldung.persistence.model.Project;
-import com.baeldung.persistence.repository.IProjectRepository;
+import com.baeldung.taskmanagementapplesson.persistence.model.Project;
+import com.baeldung.taskmanagementapplesson.persistence.repository.IProjectRepository;
 
 @Repository
 public class ProjectRepositoryImpl implements IProjectRepository {

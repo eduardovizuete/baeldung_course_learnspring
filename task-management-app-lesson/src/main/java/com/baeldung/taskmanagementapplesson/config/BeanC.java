@@ -1,4 +1,4 @@
-package com.baeldung.config;
+package com.baeldung.taskmanagementapplesson.config;
 
 import javax.annotation.PreDestroy;
 

@@ -1,8 +1,8 @@
-package com.baeldung.service;
+package com.baeldung.taskmanagementapplesson.service;
 
 import java.util.Optional;
 
-import com.baeldung.persistence.model.Project;
+import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
 public interface IProjectService {
 	

@@ -1,12 +1,12 @@
-package com.baeldung.service.impl;
+package com.baeldung.taskmanagementapplesson.service.impl;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.baeldung.persistence.model.Project;
-import com.baeldung.persistence.repository.IProjectRepository;
-import com.baeldung.service.IProjectService;
+import com.baeldung.taskmanagementapplesson.persistence.model.Project;
+import com.baeldung.taskmanagementapplesson.persistence.repository.IProjectRepository;
+import com.baeldung.taskmanagementapplesson.service.IProjectService;
 
 public class ProjectServiceImpSetterInjection implements IProjectService {
 	

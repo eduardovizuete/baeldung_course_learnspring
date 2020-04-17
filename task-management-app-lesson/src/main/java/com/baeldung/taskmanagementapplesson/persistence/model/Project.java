@@ -1,4 +1,4 @@
-package com.baeldung.persistence.model;
+package com.baeldung.taskmanagementapplesson.persistence.model;
 
 import java.time.LocalDate;
 

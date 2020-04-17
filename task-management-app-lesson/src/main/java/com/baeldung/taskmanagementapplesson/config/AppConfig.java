@@ -1,10 +1,10 @@
-package com.baeldung.config;
+package com.baeldung.taskmanagementapplesson.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.baeldung.service.IProjectService;
-import com.baeldung.service.impl.ProjectServiceImpSetterInjection;
+import com.baeldung.taskmanagementapplesson.service.IProjectService;
+import com.baeldung.taskmanagementapplesson.service.impl.ProjectServiceImpSetterInjection;
 
 @Configuration
 public class AppConfig {
