@@ -2,6 +2,7 @@ package com.baeldung.taskmanagementapplesson.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
@@ -9,6 +10,7 @@ import com.baeldung.taskmanagementapplesson.persistence.repository.IProjectRepos
 import com.baeldung.taskmanagementapplesson.service.IProjectService;
 
 @Service
+@Primary
 public class ProjectServiceImpl implements IProjectService {
 	
 	private IProjectRepository projectRepository;
