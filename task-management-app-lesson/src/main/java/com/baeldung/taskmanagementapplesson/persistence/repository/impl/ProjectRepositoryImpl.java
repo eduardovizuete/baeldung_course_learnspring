@@ -6,36 +6,34 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import com.baeldung.taskmanagementapplesson.config.BeanC;
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 import com.baeldung.taskmanagementapplesson.persistence.repository.IProjectRepository;
 
+@Profile("dev")
 @Repository
 public class ProjectRepositoryImpl implements IProjectRepository {
 	
-	private static final Logger log = LoggerFactory.getLogger(BeanC.class);
-	
-	@Value("${project.prefix}")
-    private String prefix;
-
-    @Value("${project.suffix}")
-    private Integer suffix;
-	
+	private static final Logger LOG = LoggerFactory.getLogger(ProjectRepositoryImpl.class);
+		
 	List<Project> projects = new ArrayList<>();
+	
+	public ProjectRepositoryImpl() {
+        super();
+    }
 
 	@Override
 	public Optional<Project> findById(Long id) {
+		LOG.info("Retrieving Project using ProjectRepositoryImpl");
 		return projects.stream().filter(p -> p.getId() == id).findFirst();
 	}
 
 	@Override
 	public Project save(Project project) {
-		Project existingProject = findById(project.getId()).orElse(null);
-		 updateInternalId(project);
-		 
+		LOG.info("Saving Project using ProjectRepositoryImpl");
+		Project existingProject = findById(project.getId()).orElse(null);		 
 		if (existingProject == null) {
 			projects.add(project);
 		} else {
@@ -46,13 +44,4 @@ public class ProjectRepositoryImpl implements IProjectRepository {
 		return project;
 	}	
 	
-	private void updateInternalId(Project project) {
-		log.info("Prepending Prefix " + prefix);
-		log.info("Appending Suffix " + suffix);
-
-	    project.setInternalId(prefix + "-" + project.getId() + "-" + suffix);
-
-	    log.info("Generated internal id " + project.getInternalId());
-	}
-
 }
