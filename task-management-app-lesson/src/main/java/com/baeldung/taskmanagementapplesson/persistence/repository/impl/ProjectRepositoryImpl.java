@@ -6,13 +6,11 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 import com.baeldung.taskmanagementapplesson.persistence.repository.IProjectRepository;
 
-@Profile("dev")
 @Repository
 public class ProjectRepositoryImpl implements IProjectRepository {
 	
