@@ -13,12 +13,6 @@ public class ContextIntegrationTest {
 
 	@Test
 	public void whenContextIsLoad_thenNoExceptions() {
-		System.out.println();
 	}
 	
-	@Test
-	public void whenContextIsLoad_thenNoExceptions2() {
-		System.out.println();
-	}
-
 }
