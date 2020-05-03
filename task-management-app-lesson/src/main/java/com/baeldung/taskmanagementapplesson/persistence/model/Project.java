@@ -1,33 +1,31 @@
 package com.baeldung.taskmanagementapplesson.persistence.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.Random;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Project {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
+	
 	private String name;
+	
 	private LocalDate dateCreated;
-	private String internalId;
 	
-	public Project(Long id, String name, LocalDate dateCreated) {
-		if(Objects.isNull(id)) {
-            id = new Random().nextLong();
-        }
-		this.id = id;
-		this.name = name;
-		this.dateCreated = dateCreated;
-	}
+	public Project() { }
 	
-	public Project(String name, LocalDate dateCreated) {
-        this.id = new Random().nextLong();
+	public Project(String name, LocalDate dateCreated) {       
         this.name = name;
         this.dateCreated = dateCreated;
     }
 	
 	public Project(Project project) {
-		this(project.getId(), project.getName(), project.getDateCreated());
+		this(project.getName(), project.getDateCreated());
 	}
 	
 	public Long getId() {
@@ -53,14 +51,6 @@ public class Project {
 	public void setDateCreated(LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	
-	public String getInternalId() {
-        return internalId;
-    }
-
-    public void setInternalId(String internalId) {
-        this.internalId = internalId;
-    }
 	
 	@Override
 	public int hashCode() {
@@ -101,7 +91,7 @@ public class Project {
 	
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", internalId=" + internalId + "] \n";
+		return "Project [id=" + id + ", name=" + name + "] \n";
 	}
 
 }

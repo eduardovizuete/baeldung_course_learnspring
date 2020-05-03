@@ -1,13 +1,9 @@
 package com.baeldung.taskmanagementapplesson.persistence.repository;
 
-import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
-public interface IProjectRepository {
+public interface IProjectRepository extends CrudRepository<Project, Long>{
 	
-	Optional<Project> findById(Long id);
-	
-	Project save(Project project);
-
 }
