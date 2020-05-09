@@ -7,7 +7,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 public class SpringContextIntegrationTest {
 
     @Test
-    public void whenContextIsLoaded1_thenNoExceptions() {
+    public void whenContextIsLoaded_thenNoExceptions() {
         //
     }
 
