@@ -1,17 +1,13 @@
 package com.baeldung.taskmanagementapplesson.persistence.repository;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
-
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
-public interface IProjectRepository extends PagingAndSortingRepository<Project, Long> {
+public interface IProjectRepository {
 	
-	Optional<Project> findByName(String name);
-	
-	List<Project> findByDateCreatedBetween(LocalDate start, LocalDate end);
+	Optional<Project> findById(Long id);
+
+    Project save(Project project);
 		
 }

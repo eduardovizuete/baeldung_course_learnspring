@@ -15,22 +15,22 @@ public class ProjectServiceImpl implements IProjectService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ProjectServiceImpl.class);
 	
-	private IProjectRepository projectRepository;
+	private IProjectRepository projectDao;
 
-	public ProjectServiceImpl(IProjectRepository projectRepository) {
-		this.projectRepository = projectRepository;
+	public ProjectServiceImpl(IProjectRepository projectDao) {
+		this.projectDao = projectDao;
 	}
 
 	@Override
 	public Optional<Project> findById(Long id) {
 		LOG.info("Project Service >> Finding Project By Id {}", id);
-		return projectRepository.findById(id);
+		return projectDao.findById(id);
 	}
 
 	@Override
 	public Project save(Project project) {
 		LOG.info("Project Service >> Saving Project {}", project);
-		return projectRepository.save(project);
+		return projectDao.save(project);
 	}
 
 }

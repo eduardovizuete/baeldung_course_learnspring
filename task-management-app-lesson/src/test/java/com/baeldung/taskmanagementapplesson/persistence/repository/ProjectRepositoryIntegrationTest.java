@@ -1,20 +1,15 @@
 package com.baeldung.taskmanagementapplesson.persistence.repository;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
@@ -22,30 +17,23 @@ import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 public class ProjectRepositoryIntegrationTest {
 	
 	@Autowired
-	private IProjectRepository projectRepository;
-	
-	@Test
-	public void givenDataCreated_whenFindAllPaginated_thenSuccess() {
-		Page<Project> retrievedProjects = projectRepository.findAll(PageRequest.of(0, 2));
+    IProjectRepository projectRepository;
 
-        assertThat(retrievedProjects.getContent(), hasSize(2));
-	}
-	
-	@Test
-	public void givenDataCreated_whenFindAllSorted_thenSuccess() {
-		List<Project> retrievedProjects = (List<Project>) projectRepository.findAll(Sort.by(Order.asc("name")));
+    @Test
+    public void whenSavingNewProject_thenSuccess() {
+        Project newProject = new Project(randomAlphabetic(6), LocalDate.now());
 
-        List<Project> sortedProjects = retrievedProjects.stream().collect(Collectors.toList());
-        sortedProjects.sort(Comparator.comparing(Project::getName));
-        
-        assertEquals(sortedProjects, retrievedProjects);
-	}
-	
-	@Test
-	public void givenDataCreated_whenFindAllPaginatedAndSorted_thenSuccess() {
-		Page<Project> retrievedProjects = projectRepository.findAll(PageRequest.of(0, 2, Sort.by(Order.asc("name"))));
+        assertNotNull(projectRepository.save(newProject));
+    }
 
-		assertThat(retrievedProjects.getContent(), hasSize(2));
-	}
+    @Test
+    public void givenProject_whenFindById_thenSuccess() {
+        Project newProject = new Project(randomAlphabetic(6), LocalDate.now());
+        projectRepository.save(newProject);
+
+        Optional<Project> retreivedProject = projectRepository.findById(newProject.getId());
+
+        assertEquals(retreivedProject.get(), newProject);
+    }
 
 }
