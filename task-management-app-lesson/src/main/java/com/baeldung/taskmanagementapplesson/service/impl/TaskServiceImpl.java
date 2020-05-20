@@ -1,5 +1,7 @@
 package com.baeldung.taskmanagementapplesson.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.baeldung.taskmanagementapplesson.exception.TaskNotSavedException;
@@ -19,6 +21,11 @@ public class TaskServiceImpl implements ITaskService {
     @Override
     public Iterable<Task> findAll() {
         return taskRepository.findAll();
+    }
+    
+    @Override
+    public Optional<Task> findById(Long id) {
+        return taskRepository.findById(id);
     }
 
     @Override

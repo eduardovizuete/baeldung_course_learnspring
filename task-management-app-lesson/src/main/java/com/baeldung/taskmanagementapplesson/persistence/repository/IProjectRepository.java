@@ -1,8 +1,8 @@
 package com.baeldung.taskmanagementapplesson.persistence.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
 
-public interface IProjectRepository extends CrudRepository<Project, Long> {
+public interface IProjectRepository extends PagingAndSortingRepository<Project, Long> {
 }
