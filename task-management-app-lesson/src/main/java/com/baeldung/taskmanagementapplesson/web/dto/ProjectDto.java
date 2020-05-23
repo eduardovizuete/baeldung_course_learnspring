@@ -4,15 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.baeldung.taskmanagementapplesson.persistence.model.Task;
-
 public class ProjectDto {
 	
 	private Long id;
 	
 	private String name;
 	
-	private Set<Task> tasks;
+	private Set<TaskDto> tasks;
 	
 	public ProjectDto() {
     }
@@ -51,11 +49,11 @@ public class ProjectDto {
 		this.name = name;
 	}
 	
-	public Set<Task> getTasks() {
+	public Set<TaskDto> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
+	public void setTasks(Set<TaskDto> tasks) {
         this.tasks = tasks;
     }
 	

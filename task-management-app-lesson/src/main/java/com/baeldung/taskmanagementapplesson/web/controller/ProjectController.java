@@ -1,5 +1,7 @@
 package com.baeldung.taskmanagementapplesson.web.controller;
 
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,13 @@ public class ProjectController {
     }
 	
 	private ProjectDto convertToDto(Project entity) {
-		return new ProjectDto(entity.getId(), entity.getName());
+		ProjectDto dto = new ProjectDto(entity.getId(), entity.getName());
+		dto.setTasks(entity.getTasks()
+	            .stream()
+	            .map(t -> convertTaskToDto(t))
+	            .collect(Collectors.toSet()));
+		
+		return dto;
 	}
 	
 	private Project convertToEntity(ProjectDto dto) {
