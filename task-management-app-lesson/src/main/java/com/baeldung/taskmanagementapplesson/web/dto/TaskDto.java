@@ -1,14 +1,16 @@
-package com.baeldung.taskmanagementapplesson.persistence.model;
+package com.baeldung.taskmanagementapplesson.web.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Task {
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.baeldung.taskmanagementapplesson.persistence.model.TaskStatus;
+
+public class TaskDto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,17 +20,19 @@ public class Task {
 	
 	private String description;
 	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dateCreated;
 	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dueDate;
 	
 	private TaskStatus status;
 
-	public Task() {
+	public TaskDto() {
 		
 	}
 
-	public Task(String name, String description, LocalDate dateCreated, LocalDate dueDate) {
+	public TaskDto(String name, String description, LocalDate dateCreated, LocalDate dueDate) {
 		this.name = name;
 		this.description = description;
 		this.dateCreated = dateCreated;
@@ -36,7 +40,8 @@ public class Task {
 		this.status = TaskStatus.TO_DO;
 	}
 	
-	public Task(String name, String description, LocalDate dateCreated, LocalDate dueDate, TaskStatus status) {
+	public TaskDto(Long id, String name, String description, LocalDate dateCreated, LocalDate dueDate, TaskStatus status) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.dateCreated = dateCreated;
@@ -44,8 +49,8 @@ public class Task {
 		this.status = status;
 	}
 	
-	public Task(Task task) {
-        this(task.getName(), task.getDescription(), task.getDateCreated(), task.getDueDate());
+	public TaskDto(TaskDto TaskDto) {
+        this(TaskDto.getName(), TaskDto.getDescription(), TaskDto.getDateCreated(), TaskDto.getDueDate());
     }
 
 	public Long getId() {
@@ -117,7 +122,7 @@ public class Task {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Task other = (Task) obj;
+		TaskDto other = (TaskDto) obj;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
 				return false;
@@ -150,7 +155,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", name=" + name + ", status=" + status + "]\n";
+		return "TaskDto [id=" + id + ", name=" + name + ", status=" + status + "]\n";
 	}
-	
+
 }
