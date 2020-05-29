@@ -1,9 +1,9 @@
 package com.baeldung.taskmanagementapplesson.spring;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringJUnitConfig
+@SpringBootTest
 public class SpringContextIntegrationTest {
 
     @Test
