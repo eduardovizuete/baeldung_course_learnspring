@@ -1,15 +1,18 @@
 package com.baeldung.taskmanagementapplesson.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
@@ -18,7 +21,7 @@ import com.baeldung.taskmanagementapplesson.service.IProjectService;
 import com.baeldung.taskmanagementapplesson.web.dto.ProjectDto;
 import com.baeldung.taskmanagementapplesson.web.dto.TaskDto;
 
-@RestController
+@Controller
 @RequestMapping(value = "/projects")
 public class ProjectController {
 
@@ -26,6 +29,15 @@ public class ProjectController {
 
     public ProjectController(IProjectService projectService) {
         this.projectService = projectService;
+    }
+    
+    @GetMapping
+    public String getProjects(Model model) {
+        Iterable<Project> projects = projectService.findAll();
+        List<ProjectDto> projectDtos = new ArrayList<>();
+        projects.forEach(p -> projectDtos.add(convertToDto(p)));
+        model.addAttribute("projects", projectDtos);
+        return "projects";
     }
 
     @GetMapping(value = "/{id}")
