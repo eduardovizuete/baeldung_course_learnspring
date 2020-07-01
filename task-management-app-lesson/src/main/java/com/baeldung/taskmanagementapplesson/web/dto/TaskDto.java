@@ -2,160 +2,84 @@ package com.baeldung.taskmanagementapplesson.web.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baeldung.taskmanagementapplesson.persistence.model.TaskStatus;
 
 public class TaskDto {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String name;
-	
-	private String description;
-	
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate dateCreated;
-	
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate dueDate;
-	
-	private TaskStatus status;
+    private Long id;
 
-	public TaskDto() {
-		
-	}
+    private String name;
 
-	public TaskDto(String name, String description, LocalDate dateCreated, LocalDate dueDate) {
-		this.name = name;
-		this.description = description;
-		this.dateCreated = dateCreated;
-		this.dueDate = dueDate;
-		this.status = TaskStatus.TO_DO;
-	}
-	
-	public TaskDto(Long id, String name, String description, LocalDate dateCreated, LocalDate dueDate, TaskStatus status) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.dateCreated = dateCreated;
-		this.dueDate = dueDate;
-		this.status = status;
-	}
-	
-	public TaskDto(TaskDto TaskDto) {
-        this(TaskDto.getName(), TaskDto.getDescription(), TaskDto.getDateCreated(), TaskDto.getDueDate());
+    private String description;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateCreated;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dueDate;
+
+    private TaskStatus status;
+
+    public TaskDto() {
     }
 
-	public Long getId() {
-		return id;
-	}
+    public TaskDto(Long id, String name, String description, LocalDate dateCreated, LocalDate dueDate, TaskStatus status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dueDate = dueDate;
+        this.status = status;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public LocalDate getDateCreated() {
-		return dateCreated;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setDateCreated(LocalDate dateCreated) {
-		this.dateCreated = dateCreated;
-	}
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
 
-	public LocalDate getDueDate() {
-		return dueDate;
-	}
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
-	public void setDueDate(LocalDate dueDate) {
-		this.dueDate = dueDate;
-	}
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
-	public TaskStatus getStatus() {
-		return status;
-	}
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 
-	public void setStatus(TaskStatus status) {
-		this.status = status;
-	}
+    public TaskStatus getStatus() {
+        return status;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TaskDto other = (TaskDto) obj;
-		if (dateCreated == null) {
-			if (other.dateCreated != null)
-				return false;
-		} else if (!dateCreated.equals(other.dateCreated))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (dueDate == null) {
-			if (other.dueDate != null)
-				return false;
-		} else if (!dueDate.equals(other.dueDate))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (status != other.status)
-            return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TaskDto [id=" + id + ", name=" + name + ", status=" + status + "]\n";
-	}
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
 
 }
+
