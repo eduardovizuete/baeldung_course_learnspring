@@ -2,14 +2,17 @@ package com.baeldung.taskmanagementapplesson.service.impl;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.baeldung.taskmanagementapplesson.exception.TaskNotSavedException;
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
@@ -71,5 +74,16 @@ public class ProjectServiceImpl implements IProjectService {
 
 	    save(newProject);
 	}
+	
+	@Override
+    public Project addTasks(Project project, List<Task> tasks) {
+        project.getTasks()
+            .addAll(tasks.stream()
+                .filter(t -> !StringUtils.isEmpty(t.getName()))
+                .collect(Collectors.toList()));
+        projectRepository.save(project);
+
+        return project;
+    }
 
 }

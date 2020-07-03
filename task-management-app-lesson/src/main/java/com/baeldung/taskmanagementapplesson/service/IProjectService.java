@@ -1,9 +1,11 @@
 package com.baeldung.taskmanagementapplesson.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.baeldung.taskmanagementapplesson.exception.TaskNotSavedException;
 import com.baeldung.taskmanagementapplesson.persistence.model.Project;
+import com.baeldung.taskmanagementapplesson.persistence.model.Task;
 
 public interface IProjectService {
 	
@@ -14,5 +16,7 @@ public interface IProjectService {
 	Project save(Project project);
 	
 	void createProjectWithTasks() throws TaskNotSavedException;
+	
+	Project addTasks(Project project, List<Task> tasks);
 
 }
