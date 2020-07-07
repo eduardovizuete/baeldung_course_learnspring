@@ -19,13 +19,13 @@ public class TaskRepositoryIntegrationTest {
     ITaskRepository taskRepository;
 
     @Test
-    public void whenSavingNewTask_thenSuccess() {
+    public void givenNewTask_thenSavedSuccess() {
         Task newTask = new Task("First Task", "First Task", LocalDate.now(), LocalDate.now());
         assertNotNull(taskRepository.save(newTask));
     }
 
     @Test
-    public void givenTask_whenFindById_thenSuccess() {
+    public void givenTaskCreated_thenFindByIdSuccess() {
         Task newTask = new Task("First Task", "First Task", LocalDate.now(), LocalDate.now());
         taskRepository.save(newTask);
 

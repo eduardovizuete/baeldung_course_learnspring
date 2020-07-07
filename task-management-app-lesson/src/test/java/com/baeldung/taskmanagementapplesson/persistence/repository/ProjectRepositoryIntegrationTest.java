@@ -19,13 +19,13 @@ public class ProjectRepositoryIntegrationTest {
     IProjectRepository projectRepository;
 
     @Test
-    public void whenSavingNewProject_thenSuccess() {
+    public void givenNewProject_thenSavedSuccess() {
         Project newProject = new Project("First Project", LocalDate.now());
         assertNotNull(projectRepository.save(newProject));
     }
 
     @Test
-    public void givenProject_whenFindById_thenSuccess() {
+    public void givenProjectCreated_thenFindByIdSuccess() {
         Project newProject = new Project("First Project", LocalDate.now());
         projectRepository.save(newProject);
 
