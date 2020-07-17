@@ -18,5 +18,7 @@ public interface IProjectService {
 	void createProjectWithTasks() throws TaskNotSavedException;
 	
 	Project addTasks(Project project, List<Task> tasks);
+	
+	void delete(Long id);
 
 }

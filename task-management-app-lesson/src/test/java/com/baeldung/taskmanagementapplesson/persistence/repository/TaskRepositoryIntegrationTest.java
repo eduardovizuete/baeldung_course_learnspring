@@ -1,7 +1,6 @@
 package com.baeldung.taskmanagementapplesson.persistence.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,17 +18,17 @@ public class TaskRepositoryIntegrationTest {
     ITaskRepository taskRepository;
 
     @Test
-    public void givenNewTask_thenSavedSuccess() {
+    public void givenNewTask_whenSaved_thenSuccess() {
         Task newTask = new Task("First Task", "First Task", LocalDate.now(), LocalDate.now());
-        assertNotNull(taskRepository.save(newTask));
+        assertThat(taskRepository.save(newTask)).isNotNull();
     }
 
     @Test
-    public void givenTaskCreated_thenFindByIdSuccess() {
+    public void givenTaskCreated_whenFindById_thenSuccess() {
         Task newTask = new Task("First Task", "First Task", LocalDate.now(), LocalDate.now());
         taskRepository.save(newTask);
 
         Optional<Task> retreivedTask = taskRepository.findById(newTask.getId());
-        assertEquals(retreivedTask.get(), newTask);
+        assertThat(retreivedTask.get()).isEqualTo(newTask);
     }
 }
