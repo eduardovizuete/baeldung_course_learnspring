@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,15 +43,6 @@ public class ProjectController {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return convertToDto(entity);
     }
-    
-    // PathVariable with Regular Expressions
-    // request example http://localhost:8080/projects/categoryA-12/1
-    @GetMapping(value = "/{category}-{subcategoryId:\\d\\d}/{id}")
-    public ProjectDto findOneRegExp(@PathVariable Long id, @PathVariable String category, @PathVariable Integer subcategoryId) {
-        Project entity = projectService.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return convertToDto(entity);
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -58,10 +50,10 @@ public class ProjectController {
         Project entity = convertToEntity(newProject);
         return this.convertToDto(this.projectService.save(entity));
     }
-
+    
     @GetMapping
-    public Collection<ProjectDto> findAll() {
-        Iterable<Project> allProjects = this.projectService.findAll();
+    public Collection<ProjectDto> findProjects(@RequestParam(name = "name", defaultValue = "") String name) {
+        Iterable<Project> allProjects = this.projectService.findByName(name);
         List<ProjectDto> projectDtos = new ArrayList<>();
         allProjects.forEach(p -> projectDtos.add(convertToDto(p)));
         return projectDtos;

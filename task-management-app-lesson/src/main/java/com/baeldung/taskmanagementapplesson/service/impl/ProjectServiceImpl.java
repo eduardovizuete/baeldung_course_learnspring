@@ -46,6 +46,11 @@ public class ProjectServiceImpl implements IProjectService {
 		LOG.info("Project Service >> Finding Project By Id {}", id);
 		return projectRepository.findById(id);
 	}
+	
+	@Override
+    public Iterable<Project> findByName(String name) {
+        return projectRepository.findByNameContaining(name);
+    }
 
 	@Override
 	public Project save(Project project) {
