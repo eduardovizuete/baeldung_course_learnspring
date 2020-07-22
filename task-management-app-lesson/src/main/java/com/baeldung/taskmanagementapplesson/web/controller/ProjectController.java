@@ -42,6 +42,15 @@ public class ProjectController {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return convertToDto(entity);
     }
+    
+    // PathVariable with Regular Expressions
+    // request example http://localhost:8080/projects/categoryA-12/1
+    @GetMapping(value = "/{category}-{subcategoryId:\\d\\d}/{id}")
+    public ProjectDto findOneRegExp(@PathVariable Long id, @PathVariable String category, @PathVariable Integer subcategoryId) {
+        Project entity = projectService.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return convertToDto(entity);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
