@@ -40,7 +40,7 @@ public class ProjectController {
     @GetMapping(value = "/{id}")
     public ProjectDto findOne(@PathVariable Long id) {
         Project entity = projectService.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
         return convertToDto(entity);
     }
 
