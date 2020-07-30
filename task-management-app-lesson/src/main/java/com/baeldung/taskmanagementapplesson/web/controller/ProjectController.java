@@ -45,10 +45,9 @@ public class ProjectController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProjectDto create(@RequestBody ProjectDto newProject) {
+    public void create(@RequestBody ProjectDto newProject) {
         Project entity = convertToEntity(newProject);
-        return this.convertToDto(this.projectService.save(entity));
+        this.projectService.save(entity);
     }
     
     @GetMapping
