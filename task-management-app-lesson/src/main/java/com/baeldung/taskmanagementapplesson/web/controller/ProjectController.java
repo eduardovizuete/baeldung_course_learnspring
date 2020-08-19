@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.baeldung.taskmanagementapplesson.events.ProjectCreatedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +34,9 @@ public class ProjectController {
 
     private IProjectService projectService;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     public ProjectController(IProjectService projectService) {
         this.projectService = projectService;
     }
@@ -46,8 +52,8 @@ public class ProjectController {
 
     @PostMapping
     public void create(@RequestBody ProjectDto newProject) {
-        Project entity = convertToEntity(newProject);
-        this.projectService.save(entity);
+        Project entity = this.projectService.save(convertToEntity(newProject));
+        publisher.publishEvent(new ProjectCreatedEvent(entity.getId()));
     }
     
     @GetMapping
@@ -74,7 +80,7 @@ public class ProjectController {
         ProjectDto dto = new ProjectDto(entity.getId(), entity.getName(), entity.getDateCreated());
         dto.setTasks(entity.getTasks()
             .stream()
-            .map(t -> convertTaskToDto(t))
+            .map(this::convertTaskToDto)
             .collect(Collectors.toSet()));
 
         return dto;
@@ -89,8 +95,8 @@ public class ProjectController {
     }
 
     protected TaskDto convertTaskToDto(Task entity) {
-        TaskDto dto = new TaskDto(entity.getId(), entity.getName(), entity.getDescription(), entity.getDateCreated(), entity.getDueDate(), entity.getStatus());
-        return dto;
+        return new TaskDto(entity.getId(), entity.getName(), entity.getDescription(),
+                entity.getDateCreated(), entity.getDueDate(), entity.getStatus());
     }
 
     protected Task convertTaskToEntity(TaskDto dto) {
