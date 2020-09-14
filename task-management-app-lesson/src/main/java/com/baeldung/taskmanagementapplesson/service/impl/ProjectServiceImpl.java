@@ -53,8 +53,13 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
 	@Override
+	@Transactional
 	public Project save(Project project) {
 		LOG.info("Project Service >> Saving Project {}", project);
+
+		if (StringUtils.isEmpty(project.getId())) {
+			project.setDateCreated(LocalDate.now());
+		}
 		return projectRepository.save(project);
 	}
 	
